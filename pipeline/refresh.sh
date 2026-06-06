@@ -16,8 +16,8 @@ ROOT="/Users/ashokjaiswal/Development/Kyozo"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DASHBOARD_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-VAULT_DATA="$HOME/Desktop/Obsidian/Kyozo/Development/data"
-VAULT_DEV="$HOME/Desktop/Obsidian/Kyozo/Development"
+VAULT_DATA="$HOME/Desktop/Obsidian/Kyozo/11 Tech + Dev/data"
+VAULT_DEV="$HOME/Desktop/Obsidian/Kyozo/11 Tech + Dev"
 LOG="/tmp/kyozo-timeline-refresh.log"
 
 PUSH_TO_GIT="${PUSH_TO_GIT:-0}"

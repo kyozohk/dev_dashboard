@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="hover:text-accent">Timeline</Link>
               <Link href="/projects" className="hover:text-accent">Projects</Link>
               <a
-                href="obsidian://open?vault=Obsidian&file=Kyozo%2FDevelopment%2FDevelopment"
+                href="obsidian://open?vault=Obsidian&file=Kyozo%2F11%20Tech%20%2B%20Dev%2F11%20Tech%20%2B%20Dev"
                 className="hover:text-accent"
                 title="Open in Obsidian"
               >
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
         <footer className="border-t border-ink/10 mt-16">
           <div className="mx-auto max-w-6xl px-6 py-4 text-xs text-ink/50">
-            Source of truth: <span className="font-mono">~/Desktop/Obsidian/Kyozo/Development/</span>
+            Source of truth: <span className="font-mono">~/Desktop/Obsidian/Kyozo/11 Tech + Dev/</span>
           </div>
         </footer>
       </body>

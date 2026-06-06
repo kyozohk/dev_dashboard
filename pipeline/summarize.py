@@ -36,7 +36,7 @@ from datetime import datetime, date
 from pathlib import Path
 
 ROOT = Path("/Users/ashokjaiswal/Development/Kyozo")
-BUILD = ROOT / "kyozo-timeline-build"
+BUILD = Path(__file__).resolve().parent  # pipeline/ dir of this repo
 COMMITS = BUILD / "commits.json"
 
 # ---- repo → stack heuristic ------------------------------------------------

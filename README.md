@@ -66,7 +66,7 @@ npm run dev     # http://localhost:4123
 
 `lib/vault.ts` auto-detects whether the Obsidian vault exists on this
 machine. If it does, edits write straight back to
-`~/Desktop/Obsidian/Kyozo/Development/`. If not (Vercel), reads bundled
+`~/Desktop/Obsidian/Kyozo/11 Tech + Dev/`. If not (Vercel), reads bundled
 `data/` + `screenshots/`.
 
 ## Daily refresh

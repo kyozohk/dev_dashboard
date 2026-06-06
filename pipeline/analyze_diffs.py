@@ -25,7 +25,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path("/Users/ashokjaiswal/Development/Kyozo")
-BUILD = ROOT / "kyozo-timeline-build"
+BUILD = Path(__file__).resolve().parent  # pipeline/ dir of this repo
 COMMITS = BUILD / "commits.json"
 OUT = BUILD / "commit_briefs.json"
 

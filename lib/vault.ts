@@ -1,7 +1,7 @@
 /**
  * Direct read/write against the Obsidian vault.
  *
- * Canonical source of truth = JSON files at <vault>/Kyozo/Development/data/*.json
+ * Canonical source of truth = JSON files at <vault>/Kyozo/11 Tech + Dev/data/*.json
  * Markdown notes are *projections* of the JSON — when an entry is edited we
  * update both the JSON and the corresponding .md so Obsidian stays in sync.
  */
@@ -19,7 +19,7 @@ import type { Day, Month, Project, Week } from "./types";
  *    Writes are best-effort and only persist until the next deploy.
  */
 const VAULT = process.env.OBSIDIAN_VAULT || `${process.env.HOME ?? ""}/Desktop/Obsidian`;
-const LOCAL_VAULT_DEV = path.join(VAULT, "Kyozo", "Development");
+const LOCAL_VAULT_DEV = path.join(VAULT, "Kyozo", "11 Tech + Dev");
 const BUNDLED_ROOT = process.cwd();
 
 const isLocalVaultPresent = (() => {
@@ -269,7 +269,7 @@ export async function saveScreenshot(
   await fs.mkdir(target, { recursive: true });
   const finalName = `${Date.now()}-${safe}`;
   await fs.writeFile(path.join(target, finalName), bytes);
-  // path stored in JSON is relative to <vault>/Kyozo/Development
+  // path stored in JSON is relative to <vault>/Kyozo/11 Tech + Dev
   return path.posix.join("screenshots", subdir, finalName);
 }
 

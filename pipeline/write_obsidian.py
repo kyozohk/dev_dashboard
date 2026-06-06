@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Write daily/weekly/monthly markdown into the Obsidian vault.
 
-Layout (under <vault>/Kyozo/Development/):
+Layout (under <vault>/Kyozo/11 Tech + Dev/):
   data/daily.json           ← canonical store, read by the Next.js app
   data/weekly.json
   data/monthly.json
@@ -10,7 +10,7 @@ Layout (under <vault>/Kyozo/Development/):
   daily/2026/06/2026-06-06.md
   weekly/2026-W23.md
   monthly/2026-06.md
-  Development.md            ← landing page in the vault
+  11 Tech + Dev.md          ← landing page in the vault
 """
 import json
 import os
@@ -18,9 +18,9 @@ from pathlib import Path
 from datetime import datetime
 
 ROOT = Path("/Users/ashokjaiswal/Development/Kyozo")
-BUILD = ROOT / "kyozo-timeline-build"
+BUILD = Path(__file__).resolve().parent  # pipeline/ dir of this repo
 VAULT = Path("/Users/ashokjaiswal/Desktop/Obsidian")
-DEV = VAULT / "Kyozo" / "Development"
+DEV = VAULT / "Kyozo" / "11 Tech + Dev"
 
 DATA = DEV / "data"
 SHOTS = DEV / "screenshots"
@@ -203,13 +203,13 @@ def write_monthly(monthly):
 
 def write_landing(daily, weekly, monthly):
     body = [
-        "# Kyozo Development Timeline",
+        "# Kyozo · Tech + Dev",
         "",
         f"_{sum(d['total_commits'] for d in daily)} commits over {len(daily)} active days_  ",
         f"_first: {daily[0]['day']} · latest: {daily[-1]['day']}_",
         "",
         "Auto-generated from git history across all repos in `~/Development/Kyozo`.  ",
-        "Editable in the **kyozo-timeline** Next.js app (writes back to this vault).",
+        "Editable in the **dev_dashboard** Next.js app (writes back to this vault).",
         "",
         "## Months",
         "",
@@ -219,7 +219,12 @@ def write_landing(daily, weekly, monthly):
     body += ["", "## Recent days", ""]
     for d in daily[::-1][:30]:
         body += [f"- [[{d['day']}]] — {d['summary']}"]
-    (DEV / "Development.md").write_text("\n".join(body))
+    # landing note has the same name as its containing folder (Obsidian MOC convention)
+    (DEV / "11 Tech + Dev.md").write_text("\n".join(body))
+    # Remove the older landing-page filename if a previous run created it.
+    legacy = DEV / "Development.md"
+    if legacy.exists():
+        legacy.unlink()
 
 
 def write_projects(daily):

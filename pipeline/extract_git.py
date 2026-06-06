@@ -8,7 +8,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path("/Users/ashokjaiswal/Development/Kyozo")
-OUT = ROOT / "kyozo-timeline-build" / "commits.json"
+HERE = Path(__file__).resolve().parent  # pipeline/ dir of this repo
+OUT = HERE / "commits.json"
 
 SEP = "\x1f"  # unit separator (very unlikely in commit messages)
 REC = "\x1e"  # record separator
@@ -17,7 +18,9 @@ REC = "\x1e"  # record separator
 def find_repos():
     repos = []
     for git_dir in ROOT.rglob(".git"):
-        if "kyozo-timeline-build" in str(git_dir):
+        # Skip any of our own ephemeral / scaffold dirs.
+        s = str(git_dir)
+        if "kyozo-timeline-build" in s or "/dev_dashboard/" in s or "/kyozo-timeline/" in s:
             continue
         if not git_dir.is_dir():
             continue

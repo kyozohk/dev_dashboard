@@ -19,7 +19,7 @@ import net from "node:net";
 import puppeteer from "puppeteer-core";
 
 const ROOT = "/Users/ashokjaiswal/Development/Kyozo";
-const VAULT_DEV = "/Users/ashokjaiswal/Desktop/Obsidian/Kyozo/Development";
+const VAULT_DEV = "/Users/ashokjaiswal/Desktop/Obsidian/Kyozo/11 Tech + Dev";
 const SHOTS_DIR = path.join(VAULT_DEV, "screenshots", "projects");
 const PROJECTS_JSON = path.join(VAULT_DEV, "data", "projects.json");
 const DAILY_JSON = path.join(VAULT_DEV, "data", "daily.json");
