@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { background: #fafafa; color: #0f0f10; }
+.dark html, .dark body { background: #0f0f10; color: #fafafa; }
+
+.timeline-rail {
+  background: linear-gradient(to bottom, #e5e5e5 0, #e5e5e5 100%);
+  width: 2px;
+}
+
+textarea:focus, input:focus { outline: 2px solid #ff6a3d; outline-offset: 2px; }
+
+.btn {
+  @apply inline-flex items-center gap-1.5 rounded-md border border-ink/15 bg-white px-3 py-1.5 text-sm font-medium hover:bg-ink hover:text-paper transition;
+}
+.btn-primary {
+  @apply inline-flex items-center gap-1.5 rounded-md bg-ink px-3 py-1.5 text-sm font-medium text-paper hover:bg-accent transition;
+}
+
+.tag {
+  @apply inline-block rounded border border-ink/15 px-1.5 py-0.5 font-mono text-[11px] text-ink/70;
+}

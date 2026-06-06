@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  launchd job: re-extracts git history across all Kyozo repos and refreshes
+  the Obsidian vault every day at 02:30.
+
+  Install:
+    cp pipeline/com.kyozo.timeline.refresh.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.kyozo.timeline.refresh.plist
+
+  Disable:
+    launchctl unload ~/Library/LaunchAgents/com.kyozo.timeline.refresh.plist
+
+  Run on-demand for testing:
+    launchctl start com.kyozo.timeline.refresh
+
+  Logs end up at /tmp/kyozo-timeline-refresh.log
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.kyozo.timeline.refresh</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/ashokjaiswal/Development/Kyozo/dev_dashboard/pipeline/refresh.sh</string>
+    </array>
+
+    <!-- Run every day at 02:30 local time. Adjust as desired. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>2</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <!-- Catch up if the laptop was asleep at 02:30 -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/kyozo-timeline-refresh.stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/kyozo-timeline-refresh.stderr.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <!-- Set PUSH_TO_GIT=1 to also commit data/ + screenshots/ to the dev_dashboard repo -->
+        <key>PUSH_TO_GIT</key>
+        <string>0</string>
+    </dict>
+</dict>
+</plist>

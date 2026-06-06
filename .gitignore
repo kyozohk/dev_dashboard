@@ -1,0 +1,26 @@
+# Next.js
+node_modules
+.next
+out
+
+# local env
+.env.local
+.env*.local
+
+# editors / OS
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# pipeline working files (regenerated each run)
+pipeline/commits.json
+pipeline/commit_briefs.json
+pipeline/daily.json
+pipeline/weekly.json
+pipeline/monthly.json
+pipeline/screenshooter/node_modules/
+
+# data/ and screenshots/ ARE tracked — they're the source of truth for the
+# deployed Vercel instance, regenerated nightly by pipeline/refresh.sh
+# (with PUSH_TO_GIT=1).

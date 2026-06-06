@@ -1,0 +1,967 @@
+[
+  {
+    "month": "2025-05",
+    "days": [
+      "2025-05-21"
+    ],
+    "active_days": 1,
+    "total_commits": 2,
+    "total_insertions": 5895,
+    "total_deletions": 2994,
+    "active_repos": [
+      "kyozosocial"
+    ],
+    "areas": [
+      "Docs",
+      "Profile & Settings",
+      "Mobile app",
+      "Authentication",
+      "Build & config"
+    ],
+    "highlights": [
+      {
+        "repo": "kyozosocial",
+        "headline": "Widgets: ContactDetailsScreen, FirstNameScreen, HomePage, LoginScreen · Auth"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-07",
+    "days": [
+      "2025-07-07",
+      "2025-07-08"
+    ],
+    "active_days": 2,
+    "total_commits": 13,
+    "total_insertions": 24323,
+    "total_deletions": 5088,
+    "active_repos": [
+      "kyozosocial"
+    ],
+    "areas": [
+      "Mobile app",
+      "Authentication",
+      "Data model & schema",
+      "Build & config",
+      "Waitlist & Invites",
+      "Profile & Settings",
+      "Onboarding",
+      "Messaging",
+      "Organizations & Communities"
+    ],
+    "highlights": [
+      {
+        "repo": "kyozosocial",
+        "headline": "Widgets: FirstNameScreen, LoginScreen · Auth"
+      },
+      {
+        "repo": "kyozosocial",
+        "headline": "Widgets: ChatScreen, DeepLinkTestScreen, EditProfileScreen, EventDetailsScreen · Auth"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-08",
+    "days": [
+      "2025-08-06",
+      "2025-08-07",
+      "2025-08-08",
+      "2025-08-09",
+      "2025-08-10",
+      "2025-08-11",
+      "2025-08-12",
+      "2025-08-13",
+      "2025-08-14",
+      "2025-08-15",
+      "2025-08-16",
+      "2025-08-18",
+      "2025-08-19",
+      "2025-08-20",
+      "2025-08-21",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-27",
+      "2025-08-28",
+      "2025-08-30",
+      "2025-08-31"
+    ],
+    "active_days": 21,
+    "total_commits": 530,
+    "total_insertions": 241984,
+    "total_deletions": 119948,
+    "active_repos": [
+      "kyozo-pro-flow",
+      "old/kyozo-pro-flow"
+    ],
+    "areas": [
+      "UI / Components",
+      "Styling",
+      "Build & config",
+      "Mobile app",
+      "Organizations & Communities",
+      "Admin & Analytics",
+      "Onboarding",
+      "Authentication",
+      "Docs",
+      "Profile & Settings"
+    ],
+    "highlights": [
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /, /pottery-demo, /scroll-reveal-demo · Components: ThemeToggle · Hooks: useTheme"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /, /pottery-demo, /scroll-reveal-demo · Components: ThemeToggle · Hooks: useTheme"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "* Added all forms"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "* Added all forms"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Hooks: useFormValidation"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Hooks: useFormValidation"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "first commit"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "first commit"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /, /scroll-reveal-demo, /wall · Hooks: useTheme"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /, /scroll-reveal-demo, /wall · Hooks: useTheme"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-09",
+    "days": [
+      "2025-09-01",
+      "2025-09-02",
+      "2025-09-03",
+      "2025-09-04",
+      "2025-09-05",
+      "2025-09-08",
+      "2025-09-10",
+      "2025-09-11",
+      "2025-09-12",
+      "2025-09-22",
+      "2025-09-23",
+      "2025-09-24",
+      "2025-09-26",
+      "2025-09-30"
+    ],
+    "active_days": 14,
+    "total_commits": 89,
+    "total_insertions": 126507,
+    "total_deletions": 45184,
+    "active_repos": [
+      "kyozo-pro-flow",
+      "old/kyozo-pro-flow",
+      "kyozosocial"
+    ],
+    "areas": [
+      "UI / Components",
+      "Build & config",
+      "Organizations & Communities",
+      "Admin & Analytics",
+      "Mobile app",
+      "Authentication",
+      "API surface",
+      "Styling",
+      "Docs",
+      "Onboarding"
+    ],
+    "highlights": [
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /test-360dialog, /test-email, /test-telegram · API: GET+POST /api/send-telegram, GET+POST /api/send-verification, GET+POST /api/send-verification-email · Components: GET, POST, Test360Dialog, TestEmail"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /test-360dialog, /test-email, /test-telegram · API: GET+POST /api/send-telegram, GET+POST /api/send-verification, GET+POST /api/send-verification-email · Components: GET, POST, Test360Dialog, TestEmail"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /, /auth, /dashboard · Components: AnalyticsFallback, CommunityProfileFallback, MessagesFallback, SettingsFallback · Auth"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /, /auth, /dashboard · Components: AnalyticsFallback, CommunityProfileFallback, MessagesFallback, SettingsFallback · Auth"
+      },
+      {
+        "repo": "kyozosocial",
+        "headline": "✅ Working Firebase integration - Core, Auth, Firestore"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /, /dashboard, /dashboard/analytics · API: /api/send-verification, /api/verify-code · Components: DashboardFallback · Auth"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /, /dashboard, /dashboard/analytics · API: /api/send-verification, /api/verify-code · Components: DashboardFallback · Auth"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Added the members"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Added the members"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /dashboard/communities, /dashboard/communities/[slug], /dashboard/communities/[slug]/members/[id]"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-10",
+    "days": [
+      "2025-10-02",
+      "2025-10-03",
+      "2025-10-04",
+      "2025-10-05",
+      "2025-10-06",
+      "2025-10-07",
+      "2025-10-08",
+      "2025-10-10",
+      "2025-10-13",
+      "2025-10-14",
+      "2025-10-17",
+      "2025-10-20",
+      "2025-10-21",
+      "2025-10-22",
+      "2025-10-24",
+      "2025-10-26",
+      "2025-10-27",
+      "2025-10-30"
+    ],
+    "active_days": 18,
+    "total_commits": 142,
+    "total_insertions": 349726,
+    "total_deletions": 137386,
+    "active_repos": [
+      "kyozo-pro-flow",
+      "old/kyozo-pro-flow",
+      "KyozoVerse",
+      "old/KyozoVerse"
+    ],
+    "areas": [
+      "API surface",
+      "Mobile app",
+      "UI / Components",
+      "Admin & Analytics",
+      "Organizations & Communities",
+      "Docs",
+      "Build & config",
+      "Styling",
+      "Messaging",
+      "Profile & Settings"
+    ],
+    "highlights": [
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /dashboard, /dashboard/communities, /dashboard/communities/[slug] · API: OPTIONS+POST /api/enhance-message, OPTIONS+POST /api/eventbrite/attendees, OPTIONS+POST /api/eventbrite/events · Components: AuthProvider, CommunitiesFallback, CommunityProfileFallback, DashboardFallback · Hooks: useAuth, useDialog, useOnboarding · Auth"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /dashboard, /dashboard/communities, /dashboard/communities/[slug] · API: OPTIONS+POST /api/enhance-message, OPTIONS+POST /api/eventbrite/attendees, OPTIONS+POST /api/eventbrite/events · Components: AuthProvider, CommunitiesFallback, CommunityProfileFallback, DashboardFallback · Hooks: useAuth, useDialog, useOnboarding · Auth"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /dashboard, /dashboard/[communityId], /dashboard/[communityId]/inbox · Components: CommunitiesPage, CommunityDashboard, CommunityPage, DashboardLayout · Hooks: useFirebaseCollection, useInfiniteScroll, useMemoizedQuery"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /dashboard, /dashboard/[communityId], /dashboard/[communityId]/inbox · Components: CommunitiesPage, CommunityDashboard, CommunityPage, DashboardLayout · Hooks: useFirebaseCollection, useInfiniteScroll, useMemoizedQuery"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /dashboard/communities/new, /dashboard/subscription · API: GET+POST /api/create-checkout-session, GET+POST /api/create-portal-session, GET+POST /api/subscription · Components: GET, POST · Hooks: useStripe, useSubscription, useSubscriptionFeatures"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /dashboard/communities/new, /dashboard/subscription · API: GET+POST /api/create-checkout-session, GET+POST /api/create-portal-session, GET+POST /api/subscription · Components: GET, POST · Hooks: useStripe, useSubscription, useSubscriptionFeatures"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: / · Components: Badge, Calendar, Home, MenubarGroup · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: / · Components: Badge, Calendar, Home, MenubarGroup · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /dashboard/communities, /dashboard/communities/[slug]/members, /dashboard/communities/[slug]/subscription · Components: MemberDetails, MembersList, SuspenseCommunityList, SuspenseMembersList"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /dashboard/communities, /dashboard/communities/[slug]/members, /dashboard/communities/[slug]/subscription · Components: MemberDetails, MembersList, SuspenseCommunityList, SuspenseMembersList"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-11",
+    "days": [
+      "2025-11-05",
+      "2025-11-07",
+      "2025-11-08",
+      "2025-11-09",
+      "2025-11-10",
+      "2025-11-11",
+      "2025-11-12",
+      "2025-11-13",
+      "2025-11-14",
+      "2025-11-15",
+      "2025-11-16",
+      "2025-11-17",
+      "2025-11-18",
+      "2025-11-19",
+      "2025-11-20",
+      "2025-11-21",
+      "2025-11-24",
+      "2025-11-25",
+      "2025-11-26",
+      "2025-11-27",
+      "2025-11-28"
+    ],
+    "active_days": 21,
+    "total_commits": 592,
+    "total_insertions": 254672,
+    "total_deletions": 115522,
+    "active_repos": [
+      "kyozo-pro-flow",
+      "old/kyozo-pro-flow",
+      "KyozoVerse",
+      "old/KyozoVerse"
+    ],
+    "areas": [
+      "UI / Components",
+      "Organizations & Communities",
+      "Styling",
+      "Mobile app",
+      "Authentication",
+      "API surface",
+      "Feed & Posts",
+      "Members & Contacts",
+      "Admin & Analytics",
+      "Docs"
+    ],
+    "highlights": [
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "(merges only)"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "(merges only)"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle] · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle] · Auth"
+      },
+      {
+        "repo": "old/kyozo-pro-flow",
+        "headline": "Pages: /[handle], /setup, /temp · Components: ContentCreationButtons, Feed, HandleLayout, Header · Auth"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "Pages: /[handle], /setup, /temp · Components: ContentCreationButtons, Feed, HandleLayout, Header · Auth"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle]/feed · API: OPTIONS+POST /api/upload, OPTIONS+POST /api/upload-simple · Components: AudioPostCardSkeleton, CreateAudioPostForm, CreateContentFAB, CreatePostDialogSkeleton"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/feed · API: OPTIONS+POST /api/upload, OPTIONS+POST /api/upload-simple · Components: AudioPostCardSkeleton, CreateAudioPostForm, CreateContentFAB, CreatePostDialogSkeleton"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle]/broadcast · API: POST /api/whatsapp/check-pricing, POST /api/whatsapp/send-template · Components: ConfirmStep, POST, PreviewStep, RecipientsStep"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/broadcast · API: POST /api/whatsapp/check-pricing, POST /api/whatsapp/send-template · Components: ConfirmStep, POST, PreviewStep, RecipientsStep"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2025-12",
+    "days": [
+      "2025-12-01",
+      "2025-12-02",
+      "2025-12-03",
+      "2025-12-08",
+      "2025-12-09",
+      "2025-12-10",
+      "2025-12-11",
+      "2025-12-12",
+      "2025-12-13",
+      "2025-12-14",
+      "2025-12-15",
+      "2025-12-30",
+      "2025-12-31"
+    ],
+    "active_days": 13,
+    "total_commits": 256,
+    "total_insertions": 67322,
+    "total_deletions": 39908,
+    "active_repos": [
+      "KyozoVerse",
+      "old/KyozoVerse"
+    ],
+    "areas": [
+      "UI / Components",
+      "Organizations & Communities",
+      "Feed & Posts",
+      "Docs",
+      "Styling",
+      "Mobile app",
+      "Members & Contacts",
+      "Authentication",
+      "Build & config",
+      "API surface"
+    ],
+    "highlights": [
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Fixed the package"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Fixed the package"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /pro/[handle]/feed · Components: ListenCard"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /pro/[handle]/feed · Components: ListenCard"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /pro/[handle]/feed"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /pro/[handle]/feed"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/join, /pro/[handle] · Components: CommunityHeader, JoinCommunityPage, PublicFeedPage · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/join, /pro/[handle] · Components: CommunityHeader, JoinCommunityPage, PublicFeedPage · Auth"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/join"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/join"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-01",
+    "days": [
+      "2026-01-03",
+      "2026-01-04",
+      "2026-01-07",
+      "2026-01-08",
+      "2026-01-09",
+      "2026-01-15",
+      "2026-01-18",
+      "2026-01-19",
+      "2026-01-20",
+      "2026-01-21",
+      "2026-01-22",
+      "2026-01-24",
+      "2026-01-26",
+      "2026-01-27",
+      "2026-01-28",
+      "2026-01-29",
+      "2026-01-30",
+      "2026-01-31"
+    ],
+    "active_days": 18,
+    "total_commits": 332,
+    "total_insertions": 215063,
+    "total_deletions": 47343,
+    "active_repos": [
+      "KyozoVerse",
+      "www.kyozo.com",
+      "old/KyozoVerse",
+      "old/KyozoProV3",
+      "waitlist.kyozo.com"
+    ],
+    "areas": [
+      "UI / Components",
+      "Organizations & Communities",
+      "Mobile app",
+      "Styling",
+      "Members & Contacts",
+      "Feed & Posts",
+      "Waitlist & Invites",
+      "Admin & Analytics",
+      "Profile & Settings",
+      "Build & config"
+    ],
+    "highlights": [
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Pages: /, /[handle], /[handle]/[postId] · API: GET+OPTIONS+POST /api/accept-invite, GET+OPTIONS+POST /api/send-email, GET+OPTIONS+POST /api/send-invite · Components: AcceptInviteForm, AudioPostCardSkeleton, AuthAndDialogProvider, AuthProvider · Hooks: useAuth, useAuthAndDialog, useCarousel · Auth"
+      },
+      {
+        "repo": "old/KyozoProV3",
+        "headline": "Components: Accordion, AccordionContent, AccordionItem, AccordionTrigger · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "kyozo-figma",
+        "headline": "Components: Accordion, AccordionContent, AccordionItem, AccordionTrigger · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "waitlist.kyozo.com",
+        "headline": "Components: Accordion, AccordionContent, AccordionItem, AccordionTrigger · Hooks: useCarousel, useChart, useIsMobile · Auth"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /, /[handle], /[handle]/[postId] · Components: CommunitiesDashboardPage, CommunitiesLayout, CommunityLayout · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /, /[handle], /[handle]/[postId] · Components: CommunitiesDashboardPage, CommunitiesLayout, CommunityLayout · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /, /[handle], /communes · Components: AnalyticsPage, CommunesPage, CommunitiesContent, CommunitiesDashboardPage · Hooks: useDebounce"
+      },
+      {
+        "repo": "old/KyozoVerse",
+        "headline": "Pages: /[handle]/members"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/broadcast · API: GET+POST+PUT /api/resend/webhook, GET+POST+PUT /api/v1/email/incoming · Components: GET, MemberCircleItem, MemberGridItem, MemberListItem"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/analytics, /[handle]/audience · API: GET+POST /api/accept-invite, GET+POST /api/ai/generate, GET+POST /api/eventbrite/attendees · Components: AnalyticsPage, CommunityAnalyticsPage, CreateGuestlistDialog, FeedViewPage · Hooks: useDebounce"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-02",
+    "days": [
+      "2026-02-03",
+      "2026-02-05",
+      "2026-02-10",
+      "2026-02-14",
+      "2026-02-27"
+    ],
+    "active_days": 5,
+    "total_commits": 21,
+    "total_insertions": 52432,
+    "total_deletions": 29958,
+    "active_repos": [
+      "kyozo_react_native",
+      "KyozoVerse",
+      "kyozosocial",
+      "kyozo-admin",
+      "www.kyozo.com"
+    ],
+    "areas": [
+      "UI / Components",
+      "Build & config",
+      "Admin & Analytics",
+      "Waitlist & Invites",
+      "Organizations & Communities",
+      "Mobile app",
+      "Docs",
+      "Styling",
+      "Feed & Posts",
+      "Authentication"
+    ],
+    "highlights": [
+      {
+        "repo": "kyozo_react_native",
+        "headline": "Components: App, AppNavigator, AuthProvider, AuthScreen · Hooks: useAuth, useNotifications, usePets"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /, /[handle]/broadcast, /[handle]/guestlist · API: GET+POST /api/mobile/register-push-token, GET+POST /api/mobile/send-notification, GET+POST /api/mobile/send-verification · Components: AnalyticsIcon, AudienceIcon, BroadcastIcon, CreateEventDialog · Auth"
+      },
+      {
+        "repo": "kyozosocial",
+        "headline": "Widgets: HomePage, KyozoApp, RobotControlPage, SignInPage · Auth"
+      },
+      {
+        "repo": "kyozo-admin",
+        "headline": "Pages: /, /dashboard · Components: AssetIcon, AssetsTab, AuthProvider, CommunitiesTab · Hooks: useAuth, useToast"
+      },
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Components: Accordion, AccordionContent, AccordionItem, AccordionTrigger · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "waitlist.kyozo.com",
+        "headline": "Pages: / · Components: AdminPage, App, Button, Container · Auth"
+      },
+      {
+        "repo": "waitlist.kyozo.com",
+        "headline": "Updated the invite text"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-03",
+    "days": [
+      "2026-03-02",
+      "2026-03-03",
+      "2026-03-04",
+      "2026-03-05",
+      "2026-03-06",
+      "2026-03-07",
+      "2026-03-10",
+      "2026-03-11",
+      "2026-03-13",
+      "2026-03-17",
+      "2026-03-18",
+      "2026-03-19",
+      "2026-03-20",
+      "2026-03-21",
+      "2026-03-23",
+      "2026-03-24",
+      "2026-03-25",
+      "2026-03-28",
+      "2026-03-30"
+    ],
+    "active_days": 19,
+    "total_commits": 69,
+    "total_insertions": 85427,
+    "total_deletions": 36068,
+    "active_repos": [
+      "www.kyozo.com",
+      "KyozoVerse",
+      "spheres-tech",
+      "kyozo_coming_soon"
+    ],
+    "areas": [
+      "UI / Components",
+      "Organizations & Communities",
+      "API surface",
+      "Mobile app",
+      "Docs",
+      "Feed & Posts",
+      "Media & Uploads",
+      "Build & config",
+      "Profile & Settings",
+      "Notifications"
+    ],
+    "highlights": [
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Pages: /community, /modal · Components: App, Article, Article1, Article2"
+      },
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Pages: / · Components: Accordion, AccordionContent, AccordionItem, AccordionTrigger · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "spheres-tech",
+        "headline": "Pages: / · Components: Badge, Calendar, Home, MenubarGroup · Hooks: useCarousel, useChart, useIsMobile"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/feed · API: POST /api/posts/delete · Components: FeedPage, POST"
+      },
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Pages: /, /[handle], /[handle]/join · API: /api/send-invite, /api/verify-invite, /api/whatsapp/send-template · Components: JoinCommunityPage, LandingPage, WillerLandingPage · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/audience, /[handle]/integrations, /[handle]/members/[userId] · API: GET+POST /api/sa/data, GET+POST /api/sa/move-community, GET+POST /api/sa/sync-member-counts · Components: GET, MemberProfilePage, POST, StatCard"
+      },
+      {
+        "repo": "kyozo_coming_soon",
+        "headline": "Pages: / · Components: Home, RootLayout"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/guestlist, /[handle]/schedule · API: POST /api/guestlists/delete, POST /api/guestlists/update · Components: EventDetailDialog, GuestlistDetailDialog, POST"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /developer · API: GET+POST /api/v1/ai/generate, GET+POST /api/v1/auth/login, GET+POST /api/v1/communities · Components: DELETE, DeveloperLayout, DeveloperPage, GET · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/feed · Components: POST · Schema: enum EmailError"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-04",
+    "days": [
+      "2026-04-03",
+      "2026-04-08",
+      "2026-04-09",
+      "2026-04-13",
+      "2026-04-14",
+      "2026-04-16",
+      "2026-04-20",
+      "2026-04-21",
+      "2026-04-23"
+    ],
+    "active_days": 9,
+    "total_commits": 29,
+    "total_insertions": 28189,
+    "total_deletions": 45815,
+    "active_repos": [
+      "KyozoVerse",
+      "www.kyozo.com",
+      "kyozo-pro-flow",
+      "spheres-tech",
+      "kyozo-admin"
+    ],
+    "areas": [
+      "UI / Components",
+      "Organizations & Communities",
+      "Docs",
+      "Mobile app",
+      "API surface",
+      "Build & config",
+      "Waitlist & Invites",
+      "Feed & Posts",
+      "Styling",
+      "Members & Contacts"
+    ],
+    "highlights": [
+      {
+        "repo": "www.kyozo.com",
+        "headline": "Pages: /[handle], /article/[postId], /community"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/audience, /[handle]/broadcast, /[handle]/feed · API: GET+POST /api/rsvp/accept, GET+POST /api/rsvp/remind, GET+POST /api/rsvp/send · Components: GET, POST, RsvpAcceptPage"
+      },
+      {
+        "repo": "kyozo-pro-flow",
+        "headline": "* Fixed the lock file"
+      },
+      {
+        "repo": "spheres-tech",
+        "headline": "Fixed the build"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle], /[handle]/members"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/settings, /communities · API: POST /api/send-email, POST /api/waitlist/add-to-waitlist, POST /api/waitlist/approve · Components: POST · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /, /communities, /sa · API: /api/sa/data, /api/sa/move-community, /api/sa/sync-member-counts · Components: RoleBadge, StatusBadge, TeamPage · Hooks: usePlatformRole · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/audience, /invite/[token] · API: /api/upload · Auth"
+      },
+      {
+        "repo": "spheres-tech",
+        "headline": "Pages: / · Components: FaqSection, Features, Footer, Hero"
+      },
+      {
+        "repo": "kyozo-admin",
+        "headline": "Pages: /dashboard · API: POST /api/admin/create-user · Components: POST, WaitlistTab"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-05",
+    "days": [
+      "2026-05-05",
+      "2026-05-06",
+      "2026-05-11",
+      "2026-05-13",
+      "2026-05-14",
+      "2026-05-15",
+      "2026-05-16",
+      "2026-05-19",
+      "2026-05-20",
+      "2026-05-25",
+      "2026-05-27"
+    ],
+    "active_days": 11,
+    "total_commits": 41,
+    "total_insertions": 90512,
+    "total_deletions": 24833,
+    "active_repos": [
+      "kyozo_dataroom",
+      "KyozoVerse",
+      "KyozoLoop",
+      "kyozo_flutter",
+      "kyozo-legal"
+    ],
+    "areas": [
+      "Mobile app",
+      "Build & config",
+      "Organizations & Communities",
+      "Docs",
+      "UI / Components",
+      "API surface",
+      "Notifications",
+      "Authentication",
+      "Admin & Analytics",
+      "Waitlist & Invites"
+    ],
+    "highlights": [
+      {
+        "repo": "kyozo_dataroom",
+        "headline": "Pages: /, /admin, /admin/login · API: /api/auth/login, /api/auth/logout, /api/track/event · Components: DialogProvider, Home, RootLayout · Hooks: useDialog, useMousePosition, useOnboarding · Auth"
+      },
+      {
+        "repo": "KyozoLoop",
+        "headline": "Pages: /, /communities, /communities/new · API: DELETE+GET+POST /api/v1/auth/login, DELETE+GET+POST /api/v1/auth/magic-link/request, DELETE+GET+POST /api/v1/auth/magic-link/verify · Components: ComposeForm, Counter, CreateCommunityForm, DELETE · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/audience · API: GET+POST /api/v1/communities/[communityId]/audience/backfill-tags, GET+POST /api/v1/communities/[communityId]/audience/dedup-keys, GET+POST /api/v1/communities/[communityId]/audience/import · Components: Checkbox, ConfirmForm, ConfirmSummary, DoneBody"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /sa, /settings/team, /waitlist · API: DELETE+GET+PATCH+POST /api/accept-invite, DELETE+GET+PATCH+POST /api/admin/waitlist, DELETE+GET+PATCH+POST /api/admin/workspace-members · Components: DELETE, GET, PATCH, POST · Auth"
+      },
+      {
+        "repo": "kyozo_dataroom",
+        "headline": "* Added the vision"
+      },
+      {
+        "repo": "kyozo_flutter",
+        "headline": "Widgets: CommunityScreen, GoogleGLogo, HomeScreen, KyozoApp · Schema: enum FeedFilter, enum PostType · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "* Continue to fix later"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "* Added the documenation"
+      },
+      {
+        "repo": "kyozo_flutter",
+        "headline": "Widgets: AudioFeedPlayer, PostDetailScreen, VideoFeedPlayer, Waveform · Auth"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/members/[userId]"
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "month": "2026-06",
+    "days": [
+      "2026-06-01",
+      "2026-06-04",
+      "2026-06-05",
+      "2026-06-06"
+    ],
+    "active_days": 4,
+    "total_commits": 24,
+    "total_insertions": 39682,
+    "total_deletions": 2712,
+    "active_repos": [
+      "KyozoLoop",
+      "Kyozo-Loop-Front",
+      "kyozo_docs",
+      "KyozoVerse"
+    ],
+    "areas": [
+      "Build & config",
+      "Styling",
+      "UI / Components",
+      "Organizations & Communities",
+      "Data model & schema",
+      "Mobile app",
+      "Profile & Settings",
+      "Docs",
+      "Authentication",
+      "Messaging"
+    ],
+    "highlights": [
+      {
+        "repo": "KyozoLoop",
+        "headline": "Pages: /loop, /loop/audience, /loop/c/[communityId] · API: DELETE+GET+PATCH+POST /api/v1/auth/me, DELETE+GET+PATCH+POST /api/v1/auth/register/start, DELETE+GET+PATCH+POST /api/v1/auth/register/verify · Components: ApiKeyForm, AudienceTable, Avatar, BrandingForm · Auth"
+      },
+      {
+        "repo": "Kyozo-Loop-Front",
+        "headline": "Pages: /, /audience, /communities · API: /api/[...path] · Components: ApiKeyForm, AudienceTable, Banner, CombinedInbox · Auth"
+      },
+      {
+        "repo": "kyozo_docs",
+        "headline": "Pages: / · Components: Home, RootLayout"
+      },
+      {
+        "repo": "KyozoVerse",
+        "headline": "Pages: /[handle]/audience, /[handle]/broadcast, /[handle]/feed · API: POST /api/v1/communities/create, POST /api/v1/import/clean · Components: ComponentsAuditPage, DistributeForm, ImportMembersDialog, ListViewGridCheckbox"
+      },
+      {
+        "repo": "KyozoLoop",
+        "headline": "API: DELETE /api/v1/orgs/[orgId]/communities/[communityId] · Components: DELETE"
+      },
+      {
+        "repo": "Kyozo-Loop-Front",
+        "headline": "Pages: /communities, /communities/[communityId]/audience, /communities/[communityId]/feed · Components: AppShell, CommunitySidebar, CustomListView, Feed"
+      },
+      {
+        "repo": "KyozoLoop",
+        "headline": "API: DELETE+GET+PATCH+POST /api/v1/orgs/[orgId], DELETE+GET+PATCH+POST /api/v1/orgs/[orgId]/communities/[communityId]/members/[contactId], DELETE+GET+PATCH+POST /api/v1/orgs/[orgId]/contacts/[contactId]/messages · Components: DELETE, GET, PATCH, POST"
+      },
+      {
+        "repo": "Kyozo-Loop-Front",
+        "headline": "Pages: /settings, /settings/team · Components: AddMember, MemberRow, TeamManager"
+      }
+    ],
+    "notes": ""
+  }
+]
