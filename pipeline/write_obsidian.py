@@ -73,7 +73,7 @@ def _render_whatsapp_section(wa_events_for_day: list) -> list:
     for ev in wa_events_for_day:
         by_chat.setdefault(ev["chat"], []).append(ev)
 
-    lines = ["## WhatsApp activity", ""]
+    lines = ["## Demos · releases · product links", ""]
     for slug, events in by_chat.items():
         label = CHAT_LABELS.get(slug, slug)
         lines.append(f"### {label}")
@@ -98,6 +98,12 @@ def _render_whatsapp_section(wa_events_for_day: list) -> list:
     return lines
 
 
+import re as _re
+
+# URL detector (cheap; matches http/https — enough for product link signals).
+_URL_RE = _re.compile(r"https?://\S+", _re.I)
+
+
 def _is_system_message(ev: dict) -> bool:
     """Filter out WhatsApp meta lines (group renames, joins, encryption notice)."""
     txt = (ev.get("text") or "").lower()
@@ -109,6 +115,20 @@ def _is_system_message(ev: dict) -> bool:
     return False
 
 
+def _is_product_relevant(ev: dict) -> bool:
+    """Keep only messages that look product-related:
+       - has at least one attachment (photo / video / PDF — likely a demo or release artefact)
+       - OR contains a URL (likely a deployed product link)
+       Everything else (pure text chatter) is dropped, per the manager-friendly brief.
+    """
+    if ev.get("attachments"):
+        return True
+    txt = ev.get("text") or ""
+    if _URL_RE.search(txt):
+        return True
+    return False
+
+
 def load_whatsapp_events():
     fp = BUILD / "whatsapp_events.json"
     if not fp.exists():
@@ -116,7 +136,10 @@ def load_whatsapp_events():
     raw = json.loads(fp.read_text())
     cleaned = {}
     for day, evs in raw.items():
-        kept = [e for e in evs if not _is_system_message(e)]
+        kept = [
+            e for e in evs
+            if not _is_system_message(e) and _is_product_relevant(e)
+        ]
         if kept:
             cleaned[day] = kept
     return cleaned
@@ -225,7 +248,26 @@ def write_whatsapp_only_days(whatsapp_events, dev_days_set):
     activity (no dev commits). Gives the timeline a complete record of
     'visual confirmation' — demos, releases, decisions — even on days when
     no code was pushed.
+
+    Also cleans up any whatsapp-only notes from previous runs whose day no
+    longer survives the product-relevance filter.
     """
+    # First sweep: delete stale whatsapp-only notes that no longer match.
+    stale_removed = 0
+    for note in DAILY_DIR.rglob("*.md"):
+        try:
+            head = note.read_text(encoding="utf-8", errors="replace")[:400]
+        except Exception:
+            continue
+        if "whatsapp-only" not in head:
+            continue
+        day = note.stem
+        if day not in whatsapp_events or day in dev_days_set:
+            note.unlink(missing_ok=True)
+            stale_removed += 1
+    if stale_removed:
+        print(f"  cleaned up {stale_removed} stale whatsapp-only notes")
+
     created = 0
     for day, events in sorted(whatsapp_events.items()):
         if day in dev_days_set:
@@ -255,7 +297,7 @@ def write_whatsapp_only_days(whatsapp_events, dev_days_set):
         body = [
             f"# {day} — {day_dt.strftime('%A')}",
             "",
-            f"_{len(events)} WhatsApp messages · {n_media} attachment(s) · no code pushed today_",
+            f"_{n_media} demo/release artefact(s) · {len(events)} product moment(s) · no code pushed today_",
             "",
         ]
         body += _render_whatsapp_section(events)
@@ -370,13 +412,14 @@ def write_landing(daily, weekly, monthly):
     ]
     if wa_msgs:
         body += [
-            f"💬 **{wa_msgs:,} WhatsApp messages** across {wa_days} days · "
-            f"{wa_media:,} demo/release attachments  ",
+            f"📸 **{wa_media:,} demo / release artefacts** across {wa_days} days · "
+            f"{wa_msgs:,} product moments captured  ",
             "",
         ]
     body += [
         "Auto-generated from git history across all repos in `~/Development/Kyozo`,  ",
-        "plus WhatsApp chat exports (`whatsapp-media/` inside this folder).  ",
+        "plus product-relevant moments (demo screenshots, release links, video clips)  ",
+        "filtered from the WhatsApp chat history.  ",
         "Editable in the **dev_dashboard** Next.js app (writes back to this vault).",
         "",
         "## Months",
@@ -510,6 +553,12 @@ def main():
     (DATA / "daily.json").write_text(json.dumps(daily, indent=2, ensure_ascii=False))
     (DATA / "weekly.json").write_text(json.dumps(weekly, indent=2, ensure_ascii=False))
     (DATA / "monthly.json").write_text(json.dumps(monthly, indent=2, ensure_ascii=False))
+
+    # Mirror whatsapp_events.json into the vault data/ folder too, so the
+    # Next.js app reads it via the same vault layer.
+    wa_src = BUILD / "whatsapp_events.json"
+    if wa_src.exists():
+        (DATA / "whatsapp_events.json").write_text(wa_src.read_text())
 
     # WhatsApp activity (optional — graceful if the importer hasn't run)
     whatsapp_events = load_whatsapp_events()
