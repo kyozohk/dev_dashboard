@@ -133,7 +133,7 @@ def write_daily(daily):
         path.write_text("\n".join(front + body))
 
 
-def write_weekly(weekly):
+def write_weekly(weekly, _daily_index):
     for w in weekly:
         path = WEEKLY_DIR / f"{w['week']}.md"
         front = [
@@ -162,13 +162,21 @@ def write_weekly(weekly):
         for h in w["highlights"]:
             body += [f"- **{h['repo']}** — {h['headline']}"]
         body += ["", "## Days", ""]
+        # Lookup map: day → daily entry so we can show LOC per day.
+        _ddx = {d["day"]: d for d in _daily_index}
         for day in w["days"]:
-            body += [f"- [[{day}]]"]
+            dd = _ddx.get(day)
+            if dd:
+                body += [
+                    f"- [[{day}]] — **+{dd['total_insertions']:,}** / -{dd['total_deletions']:,}"
+                ]
+            else:
+                body += [f"- [[{day}]]"]
         body += ["", "## Notes", "", w.get("notes", "") or "_(editable from the timeline app)_", ""]
         path.write_text("\n".join(front + body))
 
 
-def write_monthly(monthly):
+def write_monthly(monthly, _daily_index):
     for m in monthly:
         path = MONTHLY_DIR / f"{m['month']}.md"
         front = [
@@ -180,10 +188,12 @@ def write_monthly(monthly):
             "---",
             "",
         ]
+        loc = m["total_insertions"] + m["total_deletions"]
         body = [
             f"# {m['month']}",
             "",
-            f"**{m['total_commits']} commits across {m['active_days']} active days** · +{m['total_insertions']} / -{m['total_deletions']}",
+            f"**+{m['total_insertions']:,} lines shipped** · -{m['total_deletions']:,} refactored · {loc:,} LOC churned  ",
+            f"_{m['active_days']} active days · {m['total_commits']} commits_",
             "",
         ]
         if m.get("areas"):
@@ -195,17 +205,28 @@ def write_monthly(monthly):
         for h in m["highlights"]:
             body += [f"- **{h['repo']}** — {h['headline']}"]
         body += ["", "## Days", ""]
+        _ddx = {d["day"]: d for d in _daily_index}
         for day in m["days"]:
-            body += [f"- [[{day}]]"]
+            dd = _ddx.get(day)
+            if dd:
+                body += [
+                    f"- [[{day}]] — **+{dd['total_insertions']:,}** / -{dd['total_deletions']:,}"
+                ]
+            else:
+                body += [f"- [[{day}]]"]
         body += ["", "## Notes", "", m.get("notes", "") or "_(editable from the timeline app)_", ""]
         path.write_text("\n".join(front + body))
 
 
 def write_landing(daily, weekly, monthly):
+    total_added = sum(d["total_insertions"] for d in daily)
+    total_removed = sum(d["total_deletions"] for d in daily)
+    total_loc = total_added + total_removed
     body = [
         "# Kyozo · Tech + Dev",
         "",
-        f"_{sum(d['total_commits'] for d in daily)} commits over {len(daily)} active days_  ",
+        f"**{total_added:,} lines of code shipped** across {len(daily)} active days  ",
+        f"_{total_removed:,} lines refactored · {total_loc:,} total LOC churned_  ",
         f"_first: {daily[0]['day']} · latest: {daily[-1]['day']}_",
         "",
         "Auto-generated from git history across all repos in `~/Development/Kyozo`.  ",
@@ -213,12 +234,20 @@ def write_landing(daily, weekly, monthly):
         "",
         "## Months",
         "",
+        "| Month | Lines shipped | Refactored | Active days |",
+        "| --- | ---: | ---: | ---: |",
     ]
     for m in monthly[::-1]:
-        body += [f"- [[{m['month']}]] — {m['total_commits']} commits / {m['active_days']} days"]
+        body += [
+            f"| [[{m['month']}]] | +{m['total_insertions']:,} | -{m['total_deletions']:,} | {m['active_days']} |"
+        ]
     body += ["", "## Recent days", ""]
     for d in daily[::-1][:30]:
-        body += [f"- [[{d['day']}]] — {d['summary']}"]
+        loc = d["total_insertions"] + d["total_deletions"]
+        body += [
+            f"- [[{d['day']}]] — **+{d['total_insertions']:,}** / -{d['total_deletions']:,} "
+            f"({loc:,} LOC) — {d['summary']}"
+        ]
     # landing note has the same name as its containing folder (Obsidian MOC convention)
     (DEV / "11 Tech + Dev.md").write_text("\n".join(body))
     # Remove the older landing-page filename if a previous run created it.
@@ -334,8 +363,8 @@ def main():
     (DATA / "monthly.json").write_text(json.dumps(monthly, indent=2, ensure_ascii=False))
 
     write_daily(daily)
-    write_weekly(weekly)
-    write_monthly(monthly)
+    write_weekly(weekly, daily)
+    write_monthly(monthly, daily)
     write_landing(daily, weekly, monthly)
     write_projects(daily)
     print(f"Wrote {len(daily)} daily, {len(weekly)} weekly, {len(monthly)} monthly notes to {DEV}")
