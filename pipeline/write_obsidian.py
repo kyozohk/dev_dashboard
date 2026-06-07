@@ -41,7 +41,88 @@ def _kv(k, v):
     return f"{k}: {v}"
 
 
-def write_daily(daily):
+CHAT_LABELS = {
+    "kyozo-hq": "Kyozo HQ 🎯",
+    "kyozo-graphics": "Kyozo Graphics",
+    "willer": "Willer",
+}
+
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".heic"}
+VIDEO_EXTS = {".mp4", ".mov", ".m4v", ".avi"}
+DOC_EXTS = {".pdf", ".doc", ".docx", ".key", ".pptx", ".csv"}
+
+
+def _attachment_markdown(att: dict) -> str:
+    """Render one attachment for Obsidian. Images/videos embed inline;
+    PDFs and docs render as a link (Obsidian opens them on click)."""
+    rel = att["rel"]
+    fname = att["file"]
+    ext = Path(fname).suffix.lower()
+    if ext in IMAGE_EXTS or ext in VIDEO_EXTS:
+        return f"![[{rel}]]"
+    return f"[[{rel}|{fname}]]"
+
+
+def _render_whatsapp_section(wa_events_for_day: list) -> list:
+    """Return markdown lines for a day's WhatsApp section. wa_events_for_day
+    is the list of message dicts for one day, already sorted by time."""
+    if not wa_events_for_day:
+        return []
+    # group by chat so each chat is its own subheader
+    by_chat: dict = {}
+    for ev in wa_events_for_day:
+        by_chat.setdefault(ev["chat"], []).append(ev)
+
+    lines = ["## WhatsApp activity", ""]
+    for slug, events in by_chat.items():
+        label = CHAT_LABELS.get(slug, slug)
+        lines.append(f"### {label}")
+        lines.append("")
+        for ev in events:
+            t = ev["time"]
+            sender = ev["sender"]
+            text = (ev.get("text") or "").strip()
+            atts = ev.get("attachments") or []
+            # one-line header per message
+            head = f"- **{t}** · _{sender}_"
+            if text:
+                # collapse newlines, cap absurdly long messages
+                t_clean = " ".join(text.splitlines()).strip()
+                if len(t_clean) > 500:
+                    t_clean = t_clean[:500] + "…"
+                head += f" — {t_clean}"
+            lines.append(head)
+            for a in atts:
+                lines.append(f"  {_attachment_markdown(a)}")
+        lines.append("")
+    return lines
+
+
+def _is_system_message(ev: dict) -> bool:
+    """Filter out WhatsApp meta lines (group renames, joins, encryption notice)."""
+    txt = (ev.get("text") or "").lower()
+    if "messages and calls are end-to-end encrypted" in txt: return True
+    if "changed the group" in txt or "added you" in txt: return True
+    if "joined using this group's invite link" in txt: return True
+    if txt.endswith(" was added") or txt.endswith(" left"): return True
+    if not txt and not (ev.get("attachments") or []): return True
+    return False
+
+
+def load_whatsapp_events():
+    fp = BUILD / "whatsapp_events.json"
+    if not fp.exists():
+        return {}
+    raw = json.loads(fp.read_text())
+    cleaned = {}
+    for day, evs in raw.items():
+        kept = [e for e in evs if not _is_system_message(e)]
+        if kept:
+            cleaned[day] = kept
+    return cleaned
+
+
+def write_daily(daily, whatsapp_events):
     for d in daily:
         day = d["day"]
         year, month, _ = day.split("-")
@@ -128,9 +209,59 @@ def write_daily(daily):
                 cats = ", ".join(f"{k}: {v}" for k, v in r["categories"].items())
                 body += [f"_areas: {cats}_", ""]
             body += ["---", ""]
+
+        # WhatsApp activity for this day, if any
+        wa = whatsapp_events.get(day)
+        if wa:
+            body += _render_whatsapp_section(wa)
+
         body += ["## Notes", "", d.get("notes", "") or "_(editable from the timeline app)_", ""]
 
         path.write_text("\n".join(front + body))
+
+
+def write_whatsapp_only_days(whatsapp_events, dev_days_set):
+    """Create lightweight daily notes for days that ONLY have WhatsApp
+    activity (no dev commits). Gives the timeline a complete record of
+    'visual confirmation' — demos, releases, decisions — even on days when
+    no code was pushed.
+    """
+    created = 0
+    for day, events in sorted(whatsapp_events.items()):
+        if day in dev_days_set:
+            continue
+        year, month, _ = day.split("-")
+        sub = DAILY_DIR / year / month
+        sub.mkdir(parents=True, exist_ok=True)
+        path = sub / f"{day}.md"
+
+        try:
+            day_dt = datetime.strptime(day, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        iso_year, iso_week, _ = day_dt.isocalendar()
+
+        front = [
+            "---",
+            f'day: "{day}"',
+            f'weekday: "{day_dt.strftime("%A")}"',
+            f'iso_week: "{iso_year}-W{iso_week:02d}"',
+            f'month: "{day[:7]}"',
+            "tags: [kyozo/development, daily, whatsapp-only]",
+            "---",
+            "",
+        ]
+        n_media = sum(len(ev.get("attachments") or []) for ev in events)
+        body = [
+            f"# {day} — {day_dt.strftime('%A')}",
+            "",
+            f"_{len(events)} WhatsApp messages · {n_media} attachment(s) · no code pushed today_",
+            "",
+        ]
+        body += _render_whatsapp_section(events)
+        path.write_text("\n".join(front + body))
+        created += 1
+    print(f"WhatsApp-only days written: {created}")
 
 
 def write_weekly(weekly, _daily_index):
@@ -222,6 +353,13 @@ def write_landing(daily, weekly, monthly):
     total_added = sum(d["total_insertions"] for d in daily)
     total_removed = sum(d["total_deletions"] for d in daily)
     total_loc = total_added + total_removed
+    wa = load_whatsapp_events()
+    wa_msgs = sum(len(v) for v in wa.values())
+    wa_days = len(wa)
+    wa_media = sum(
+        sum(len(e.get("attachments") or []) for e in evs)
+        for evs in wa.values()
+    )
     body = [
         "# Kyozo · Tech + Dev",
         "",
@@ -229,7 +367,16 @@ def write_landing(daily, weekly, monthly):
         f"_{total_removed:,} lines refactored · {total_loc:,} total LOC churned_  ",
         f"_first: {daily[0]['day']} · latest: {daily[-1]['day']}_",
         "",
-        "Auto-generated from git history across all repos in `~/Development/Kyozo`.  ",
+    ]
+    if wa_msgs:
+        body += [
+            f"💬 **{wa_msgs:,} WhatsApp messages** across {wa_days} days · "
+            f"{wa_media:,} demo/release attachments  ",
+            "",
+        ]
+    body += [
+        "Auto-generated from git history across all repos in `~/Development/Kyozo`,  ",
+        "plus WhatsApp chat exports (`whatsapp-media/` inside this folder).  ",
         "Editable in the **dev_dashboard** Next.js app (writes back to this vault).",
         "",
         "## Months",
@@ -244,9 +391,11 @@ def write_landing(daily, weekly, monthly):
     body += ["", "## Recent days", ""]
     for d in daily[::-1][:30]:
         loc = d["total_insertions"] + d["total_deletions"]
+        wa_count = len(wa.get(d["day"], []))
+        wa_tag = f" · 💬 {wa_count}" if wa_count else ""
         body += [
             f"- [[{d['day']}]] — **+{d['total_insertions']:,}** / -{d['total_deletions']:,} "
-            f"({loc:,} LOC) — {d['summary']}"
+            f"({loc:,} LOC){wa_tag} — {d['summary']}"
         ]
     # landing note has the same name as its containing folder (Obsidian MOC convention)
     (DEV / "11 Tech + Dev.md").write_text("\n".join(body))
@@ -362,11 +511,23 @@ def main():
     (DATA / "weekly.json").write_text(json.dumps(weekly, indent=2, ensure_ascii=False))
     (DATA / "monthly.json").write_text(json.dumps(monthly, indent=2, ensure_ascii=False))
 
-    write_daily(daily)
+    # WhatsApp activity (optional — graceful if the importer hasn't run)
+    whatsapp_events = load_whatsapp_events()
+    if whatsapp_events:
+        print(f"WhatsApp events present for {len(whatsapp_events)} days")
+
+    write_daily(daily, whatsapp_events)
     write_weekly(weekly, daily)
     write_monthly(monthly, daily)
     write_landing(daily, weekly, monthly)
     write_projects(daily)
+
+    # Also create daily notes for WhatsApp-only days (demo/release/decision
+    # days that didn't ship code).
+    dev_days = {d["day"] for d in daily}
+    if whatsapp_events:
+        write_whatsapp_only_days(whatsapp_events, dev_days)
+
     print(f"Wrote {len(daily)} daily, {len(weekly)} weekly, {len(monthly)} monthly notes to {DEV}")
 
 

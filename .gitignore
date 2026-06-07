@@ -19,6 +19,7 @@ pipeline/commit_briefs.json
 pipeline/daily.json
 pipeline/weekly.json
 pipeline/monthly.json
+pipeline/whatsapp_events.json
 pipeline/screenshooter/node_modules/
 
 # data/ and screenshots/ ARE tracked — they're the source of truth for the

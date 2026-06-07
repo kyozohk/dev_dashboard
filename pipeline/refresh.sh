@@ -37,10 +37,18 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
   echo "[2/4] analyze_diffs.py"
   python3 "$SCRIPT_DIR/analyze_diffs.py"
 
-  echo "[3/4] summarize.py"
+  echo "[3/5] summarize.py"
   python3 "$SCRIPT_DIR/summarize.py"
 
-  echo "[4/4] write_obsidian.py (preserves user edits)"
+  # Optional WhatsApp import — only runs if the whatsapp/ folder is present.
+  if [ -d "$ROOT/whatsapp" ]; then
+    echo "[4/5] import_whatsapp.py"
+    python3 "$SCRIPT_DIR/import_whatsapp.py"
+  else
+    echo "[4/5] import_whatsapp.py (skipped — no whatsapp/ folder)"
+  fi
+
+  echo "[5/5] write_obsidian.py (preserves user edits)"
   python3 "$SCRIPT_DIR/write_obsidian.py"
 
   if [ "$PUSH_TO_GIT" = "1" ] && [ -d "$DASHBOARD_DIR/.git" ]; then
