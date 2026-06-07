@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Kyozo dev_dashboard refresh hook.
+#
+# Installed by pipeline/install_git_hooks.sh as post-commit, post-merge,
+# post-checkout and post-rewrite in every Kyozo repo. Fires the dashboard
+# refresh pipeline in the background so the user's git command returns
+# immediately. refresh.sh has its own PID-file lock — concurrent triggers
+# coalesce automatically.
+#
+# Each rapid-fire commit sleeps for `$DEBOUNCE_S` first; only the first
+# wakeup actually runs the pipeline, the rest see the lock and bail.
+
+set -u
+
+REFRESH="/Users/ashokjaiswal/Development/Kyozo/dev_dashboard/pipeline/refresh.sh"
+DEBOUNCE_S=4
+
+[ -x "$REFRESH" ] || exit 0
+
+# Fire-and-forget — must not block git. Disown so the child survives the
+# shell that ran the hook closing.
+( sleep "$DEBOUNCE_S" && "$REFRESH" ) > /dev/null 2>&1 &
+disown 2>/dev/null || true
+exit 0

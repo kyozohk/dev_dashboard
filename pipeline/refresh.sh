@@ -8,6 +8,20 @@
 
 set -e
 
+# Single-flight lock so concurrent triggers (git hooks + cron + manual)
+# can't fight each other. If another refresh is in progress we bail
+# silently — the running one will pick up our changes via git.
+LOCK="/tmp/kyozo-timeline-refresh.pid"
+if [ -f "$LOCK" ]; then
+  other_pid="$(cat "$LOCK" 2>/dev/null || true)"
+  if [ -n "$other_pid" ] && kill -0 "$other_pid" 2>/dev/null; then
+    echo "refresh already running (pid $other_pid) — bailing" >&2
+    exit 0
+  fi
+fi
+echo "$$" > "$LOCK"
+trap 'rm -f "$LOCK"' EXIT
+
 # Source repos to mine — the parent of dev_dashboard.
 ROOT="/Users/ashokjaiswal/Development/Kyozo"
 
