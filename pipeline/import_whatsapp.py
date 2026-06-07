@@ -109,13 +109,32 @@ WHATS_DIR = ROOT / "whatsapp"
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "whatsapp_events.json"
 VAULT_DEV = Path("/Users/ashokjaiswal/Desktop/Obsidian/Kyozo/11 Tech + Dev")
-MEDIA_DEST = VAULT_DEV / "whatsapp-media"
+# Photos and videos land in the same `screenshots/` folder as captured
+# project screenshots — no chat sub-folders. Filenames get prefixed with
+# the chat slug to avoid collisions (each chat numbers attachments 1, 2, …).
+MEDIA_DEST = VAULT_DEV / "screenshots"
 
 CHATS = {
-    "WhatsApp Chat - Kyozo HQ 🎯": "kyozo-hq",
-    "WhatsApp Chat - Kyozo Graphics": "kyozo-graphics",
+    "WhatsApp Chat - Kyozo HQ 🎯": "hq",
+    "WhatsApp Chat - Kyozo Graphics": "graphics",
     "WhatsApp Chat - Willer": "willer",
 }
+
+# Chats whose messages are assumed product-relevant by default (team chats).
+TEAM_CHATS = {"hq", "graphics"}
+
+# Words that mark a message as product-relevant (case-insensitive substring).
+PRODUCT_KEYWORDS = [
+    "kyozo", "demo", "screen", "screenshot", "design", "mock", "mockup",
+    "ui", "ux", "feed", "post", "page", "view", "dashboard", "login", "signin",
+    "signup", "app", "build", "deploy", "deployed", "ship", "shipping",
+    "shipped", "launch", "launched", "release", "released", "live", "preview",
+    "prototype", "beta", "v1", "v2", "v3", "version", "rollout", "milestone",
+    "loop", "verse",  # product names
+    "figma", "vercel", "loom",  # tools-in-context
+]
+_KW_RE = re.compile("|".join(re.escape(k) for k in PRODUCT_KEYWORDS), re.I)
+_URL_RE = re.compile(r"https?://\S+", re.I)
 
 # Line opener for a message. Note WhatsApp prepends an invisible LRM (U+200E)
 # to many lines — we strip leading whitespace + that char before matching.
@@ -167,18 +186,47 @@ def parse_chat(folder: Path, slug: str):
     out = []
     for msg in msgs:
         body = "\n".join(msg["raw_lines"])
+        # Strip the attachment markers from visible text first.
+        clean = RE_ATTACH.sub("", body).strip().strip("‎ \t")
+        # Parse attachments — keep ONLY images + videos. Drop PDFs, audio,
+        # voice notes, contact cards: management-irrelevant noise.
         attachments = []
         for am in RE_ATTACH.finditer(body):
             fname = am.group(1).strip()
             src = folder / fname
             if not src.exists():
                 continue
-            rel = f"whatsapp-media/{slug}/{fname}"
-            attachments.append({"file": fname, "rel": rel, "src": str(src)})
-        # remove the attachment tags from the visible text
-        clean = RE_ATTACH.sub("", body).strip()
-        # drop the trailing "‎" marker that WhatsApp inserts
-        clean = clean.strip("‎ \t")
+            ext = Path(fname).suffix.lower()
+            if ext not in IMAGE_EXTS and ext not in VIDEO_EXTS:
+                continue  # skip PDFs/audio/vcards/etc.
+            # New filename prefix with chat slug avoids cross-chat collisions
+            new_name = f"{slug}-{fname}"
+            rel = f"screenshots/{new_name}"
+            attachments.append({"file": new_name, "src_path": str(src), "rel": rel, "kind": "video" if ext in VIDEO_EXTS else "image"})
+
+        # Product-relevance: drop anything we can't justify keeping.
+        # Rules:
+        #   - videos are always kept (rare + almost always demos)
+        #   - photos in team chats (hq/graphics) are always kept
+        #   - photos in Willer chat require: URL nearby OR product keyword in text
+        #   - text-only messages: keep if they contain a URL (likely product link)
+        has_video = any(a["kind"] == "video" for a in attachments)
+        has_image = any(a["kind"] == "image" for a in attachments)
+        has_url = bool(_URL_RE.search(clean))
+        has_kw = bool(_KW_RE.search(clean))
+
+        if has_video:
+            keep = True
+        elif has_image:
+            keep = (slug in TEAM_CHATS) or has_url or has_kw
+        elif has_url:
+            keep = True   # standalone product link
+        else:
+            keep = False
+
+        if not keep:
+            continue
+
         out.append({
             "day": msg["day"],
             "time": msg["time"],
@@ -199,6 +247,7 @@ def main():
     bytes_in = 0
     bytes_out = 0
 
+    MEDIA_DEST.mkdir(parents=True, exist_ok=True)
     for chat_dir_name, slug in CHATS.items():
         folder = WHATS_DIR / chat_dir_name
         if not folder.exists():
@@ -206,16 +255,13 @@ def main():
             continue
         print(f"parsing {folder.name} → {slug}", file=sys.stderr)
         msgs = parse_chat(folder, slug)
-        print(f"  {len(msgs)} messages", file=sys.stderr)
+        print(f"  {len(msgs)} product-relevant messages", file=sys.stderr)
 
-        # Copy referenced media into the vault. We only copy attachments that
-        # are actually referenced — orphans in the folder are skipped.
-        dest_root = MEDIA_DEST / slug
-        dest_root.mkdir(parents=True, exist_ok=True)
+        # Copy referenced media into the FLAT screenshots/ directory.
         for msg in msgs:
             for a in msg["attachments"]:
-                src = Path(a["src"])
-                dest = dest_root / a["file"]
+                src = Path(a["src_path"])
+                dest = MEDIA_DEST / a["file"]
                 if dest.exists() and dest.stat().st_size > 0:
                     media_skipped += 1
                 else:
@@ -226,8 +272,8 @@ def main():
                         media_copied += 1
                     bytes_in += src.stat().st_size
                     bytes_out += dest.stat().st_size if dest.exists() else 0
-                # Trim src field — only `file` + `rel` should land in the JSON.
-                a.pop("src", None)
+                a.pop("src_path", None)
+                a.pop("kind", None)
 
         for msg in msgs:
             by_day[msg["day"]].append({

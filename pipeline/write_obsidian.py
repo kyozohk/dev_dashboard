@@ -41,60 +41,42 @@ def _kv(k, v):
     return f"{k}: {v}"
 
 
-CHAT_LABELS = {
-    "kyozo-hq": "Kyozo HQ 🎯",
-    "kyozo-graphics": "Kyozo Graphics",
-    "willer": "Willer",
-}
-
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".heic"}
 VIDEO_EXTS = {".mp4", ".mov", ".m4v", ".avi"}
-DOC_EXTS = {".pdf", ".doc", ".docx", ".key", ".pptx", ".csv"}
 
 
 def _attachment_markdown(att: dict) -> str:
-    """Render one attachment for Obsidian. Images/videos embed inline;
-    PDFs and docs render as a link (Obsidian opens them on click)."""
-    rel = att["rel"]
-    fname = att["file"]
-    ext = Path(fname).suffix.lower()
-    if ext in IMAGE_EXTS or ext in VIDEO_EXTS:
-        return f"![[{rel}]]"
-    return f"[[{rel}|{fname}]]"
+    """Embed an image or video as an Obsidian wikilink."""
+    return f"![[{att['rel']}]]"
 
 
 def _render_whatsapp_section(wa_events_for_day: list) -> list:
-    """Return markdown lines for a day's WhatsApp section. wa_events_for_day
-    is the list of message dicts for one day, already sorted by time."""
+    """Return markdown lines for a day's product-moments section.
+
+    Flat chronological list (no per-chat sub-headers). Each entry shows
+    time + sender + caption + embedded media.
+    """
     if not wa_events_for_day:
         return []
-    # group by chat so each chat is its own subheader
-    by_chat: dict = {}
-    for ev in wa_events_for_day:
-        by_chat.setdefault(ev["chat"], []).append(ev)
+    # already sorted by time at parse time, but be defensive
+    events = sorted(wa_events_for_day, key=lambda e: e["time"])
 
-    lines = ["## Demos · releases · product links", ""]
-    for slug, events in by_chat.items():
-        label = CHAT_LABELS.get(slug, slug)
-        lines.append(f"### {label}")
-        lines.append("")
-        for ev in events:
-            t = ev["time"]
-            sender = ev["sender"]
-            text = (ev.get("text") or "").strip()
-            atts = ev.get("attachments") or []
-            # one-line header per message
-            head = f"- **{t}** · _{sender}_"
-            if text:
-                # collapse newlines, cap absurdly long messages
-                t_clean = " ".join(text.splitlines()).strip()
-                if len(t_clean) > 500:
-                    t_clean = t_clean[:500] + "…"
-                head += f" — {t_clean}"
-            lines.append(head)
-            for a in atts:
-                lines.append(f"  {_attachment_markdown(a)}")
-        lines.append("")
+    lines = ["## Product moments", ""]
+    for ev in events:
+        t = ev["time"]
+        sender = ev["sender"]
+        text = (ev.get("text") or "").strip()
+        atts = ev.get("attachments") or []
+        head = f"- **{t}** · _{sender}_"
+        if text:
+            t_clean = " ".join(text.splitlines()).strip()
+            if len(t_clean) > 400:
+                t_clean = t_clean[:400] + "…"
+            head += f" — {t_clean}"
+        lines.append(head)
+        for a in atts:
+            lines.append(f"  {_attachment_markdown(a)}")
+    lines.append("")
     return lines
 
 
@@ -297,7 +279,7 @@ def write_whatsapp_only_days(whatsapp_events, dev_days_set):
         body = [
             f"# {day} — {day_dt.strftime('%A')}",
             "",
-            f"_{n_media} demo/release artefact(s) · {len(events)} product moment(s) · no code pushed today_",
+            f"_{n_media} product screenshot(s)/video(s) · no code pushed today_",
             "",
         ]
         body += _render_whatsapp_section(events)
@@ -412,14 +394,13 @@ def write_landing(daily, weekly, monthly):
     ]
     if wa_msgs:
         body += [
-            f"📸 **{wa_media:,} demo / release artefacts** across {wa_days} days · "
-            f"{wa_msgs:,} product moments captured  ",
+            f"📸 **{wa_media:,} product moments captured** across {wa_days} days  ",
             "",
         ]
     body += [
         "Auto-generated from git history across all repos in `~/Development/Kyozo`,  ",
-        "plus product-relevant moments (demo screenshots, release links, video clips)  ",
-        "filtered from the WhatsApp chat history.  ",
+        "plus product screenshots, demo videos and release links extracted from  ",
+        "the WhatsApp chat history. All visual artefacts live in `screenshots/`.  ",
         "Editable in the **dev_dashboard** Next.js app (writes back to this vault).",
         "",
         "## Months",
